@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 int main()
 {
-	int i,j,n,a[1000],b[1000],t,max=0;
+	int i,temp,n,a[1000],s,t;
+
+    s = INT_MIN/INT_MAX;
  
     // Input the number of test cases you want to run
     scanf("%d", &t); 
@@ -16,18 +19,15 @@ int main()
  
         // Input the array
         for (i=0; i<n; i++)
-           scanf("%d",&a[i]);
-        
-        for (i=0; i<n; i++)
-        {    
-            for (j=i+1; j<n; j++)
-                if(a[i]==a[j] && (j-i)>max)
-                    max=j-i;
-                    
-        }
-        printf("%d",max);     
-            
+            scanf("%d",&a[i]);
 
+        for (i=0; i<n/2; i++){
+            temp=a[i];
+            a[i]=a[n+s+(s*i)];        
+            a[n+s+(s*i)]=temp;
+        }
+        for (i=0; i<n; i++)
+            printf("%d ",a[i]);
     }
     return 0;	
 }
